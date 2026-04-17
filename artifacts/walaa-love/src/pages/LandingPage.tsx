@@ -12,8 +12,8 @@ export default function LandingPage({ onStart }: LandingPageProps) {
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setShowSubtitle(true), 1500);
-    const t2 = setTimeout(() => setShowButton(true), 3000);
+    const t1 = setTimeout(() => setShowSubtitle(true), 700);
+    const t2 = setTimeout(() => setShowButton(true), 1300);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -44,13 +44,13 @@ export default function LandingPage({ onStart }: LandingPageProps) {
       {/* Hello Kitty decoration */}
       <div
         className="mb-4 opacity-0 animate-fade-in-up"
-        style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
+        style={{ animationDelay: "0s", animationFillMode: "forwards" }}
       >
         <HelloKitty size={140} bow="red" />
       </div>
 
       {/* Decorative stars line */}
-      <div className="flex gap-2 mb-4 opacity-0 animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}>
+      <div className="flex gap-2 mb-4 opacity-0 animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}>
         {["✦", "✨", "💕", "✨", "✦"].map((s, i) => (
           <span
             key={i}
@@ -65,7 +65,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
       {/* Main title */}
       <div
         className="opacity-0 animate-fade-in-up"
-        style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
+        style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
       >
         <h1 className="text-center mb-2">
           <span
