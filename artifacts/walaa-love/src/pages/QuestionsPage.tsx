@@ -15,7 +15,7 @@ const questions = [
   },
   {
     id: 2,
-    text: "وقتها… كنتي متوقعة توصل الأمور لهون؟",
+    text: "وقتها… كنتي متوقعة توصل الأمور هان ؟؟",
     emoji: "🌙",
     choices: [
       { emoji: "😳", text: "لا أبداً" },
@@ -25,7 +25,7 @@ const questions = [
   },
   {
     id: 3,
-    text: "مين فينا وقع بالأول؟",
+    text: "برايك يعنيي مين  فينا طاحح  بالأول؟",
     emoji: "💘",
     choices: [
       { emoji: "😏", text: "أنا" },
@@ -60,7 +60,7 @@ const questions = [
     choices: [
       { emoji: "❤️", text: "كل شي" },
       { emoji: "💖", text: "كثير" },
-      { emoji: "🫶", text: "مهم جداً" },
+      { emoji: "🫶", text: "حدا مهم جداَ" },
     ],
   },
 ];

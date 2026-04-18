@@ -129,7 +129,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           data-testid="button-start"
           onClick={handleStart}
           disabled={clicked}
-          className={`btn-glow text-white font-bold rounded-full px-8 py-4 text-xl relative overflow-hidden group ${clicked ? "opacity-70 scale-95" : ""}`}
+          className={`btn-glow w-full max-w-xs sm:w-auto text-white font-bold rounded-full px-6 sm:px-8 py-3.5 sm:py-4 text-lg sm:text-xl relative overflow-hidden group ${clicked ? "opacity-70 scale-95" : ""}`}
           style={{ fontFamily: "'Noto Naskh Arabic', sans-serif" }}
         >
           <span className="relative z-10 flex items-center gap-2">
@@ -146,7 +146,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
       </div>
 
       {/* Bottom Kitty with different bow */}
-      <div className="mt-8 flex gap-6 items-center">
+      <div className="mt-8 flex gap-4 sm:gap-6 items-center">
         <HelloKitty size={60} bow="pink" className="opacity-60" />
         <span className="text-pink-300/60 text-2xl animate-pulse-heart">💕</span>
         <HelloKitty size={60} bow="purple" className="opacity-60" />

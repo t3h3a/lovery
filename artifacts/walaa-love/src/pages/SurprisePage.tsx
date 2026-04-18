@@ -12,22 +12,24 @@ export default function SurprisePage({ onContinue }: SurprisePageProps) {
   const [showProceed, setShowProceed] = useState(false);
 
   useEffect(() => {
-    if (activated) {
-      let size = 60;
-      const interval = setInterval(() => {
-        size = size === 60 ? 80 : 60;
-        setHeartSize(size);
-      }, 600);
-
-      const t = setTimeout(() => {
-        setShowProceed(true);
-      }, 3000);
-
-      return () => {
-        clearInterval(interval);
-        clearTimeout(t);
-      };
+    if (!activated) {
+      return;
     }
+
+    let size = 60;
+    const interval = setInterval(() => {
+      size = size === 60 ? 80 : 60;
+      setHeartSize(size);
+    }, 600);
+
+    const t = setTimeout(() => {
+      setShowProceed(true);
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(t);
+    };
   }, [activated]);
 
   return (
@@ -65,7 +67,7 @@ export default function SurprisePage({ onContinue }: SurprisePageProps) {
                     fontSize: "clamp(1rem, 4vw, 1.2rem)",
                   }}
                 >
-                  في زر هون…
+                  في زر هان
                   <br />
                   بس لا تضغطي عليه! 😅
                 </p>
@@ -82,10 +84,10 @@ export default function SurprisePage({ onContinue }: SurprisePageProps) {
               <button
                 data-testid="button-surprise"
                 onClick={() => setActivated(true)}
-                className="btn-glow text-white font-bold rounded-full px-8 py-4 text-xl animate-glow-pulse"
+                className="btn-glow w-full max-w-xs sm:w-auto text-white font-bold rounded-full px-6 sm:px-8 py-3.5 sm:py-4 text-lg sm:text-xl animate-glow-pulse"
                 style={{ fontFamily: "'Noto Naskh Arabic', sans-serif" }}
               >
-                <span>لا تضغطي هون 😅</span>
+                <span>لا تضغطي هان 😅</span>
               </button>
 
               <p
@@ -137,7 +139,7 @@ export default function SurprisePage({ onContinue }: SurprisePageProps) {
             <button
               data-testid="button-proceed-letter"
               onClick={onContinue}
-              className="btn-glow text-white font-bold rounded-full px-8 py-4 text-xl animate-fade-in-up"
+              className="btn-glow w-full max-w-xs sm:w-auto text-white font-bold rounded-full px-6 sm:px-8 py-3.5 sm:py-4 text-lg sm:text-xl animate-fade-in-up"
               style={{
                 fontFamily: "'Noto Naskh Arabic', sans-serif",
                 animationFillMode: "forwards",

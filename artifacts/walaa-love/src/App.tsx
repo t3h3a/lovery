@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import StarField from "@/components/StarField";
 import FloatingHearts from "@/components/FloatingHearts";
@@ -31,6 +31,40 @@ function App() {
       setStage(next);
       setTransitioning(false);
     }, 300);
+  }, []);
+
+  useEffect(() => {
+    const audio = new Audio("/videoplayback.mp4");
+    audio.loop = true;
+    audio.volume = 0.35;
+    audio.preload = "auto";
+
+    const startAudio = () => {
+      void audio.play().catch(() => {
+        // Browsers may block autoplay with sound until the first interaction.
+      });
+    };
+
+    startAudio();
+
+    const unlockAudio = () => {
+      startAudio();
+      window.removeEventListener("click", unlockAudio);
+      window.removeEventListener("touchstart", unlockAudio);
+      window.removeEventListener("keydown", unlockAudio);
+    };
+
+    window.addEventListener("click", unlockAudio);
+    window.addEventListener("touchstart", unlockAudio);
+    window.addEventListener("keydown", unlockAudio);
+
+    return () => {
+      window.removeEventListener("click", unlockAudio);
+      window.removeEventListener("touchstart", unlockAudio);
+      window.removeEventListener("keydown", unlockAudio);
+      audio.pause();
+      audio.currentTime = 0;
+    };
   }, []);
 
   return (
