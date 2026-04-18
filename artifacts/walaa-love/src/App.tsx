@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import StarField from "@/components/StarField";
 import FloatingHearts from "@/components/FloatingHearts";
@@ -24,6 +24,8 @@ type Stage =
 function App() {
   const [stage, setStage] = useState<Stage>("landing");
   const [transitioning, setTransitioning] = useState(false);
+  const [audioPlaying, setAudioPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const goTo = useCallback((next: Stage) => {
     setTransitioning(true);
@@ -38,17 +40,27 @@ function App() {
     audio.loop = true;
     audio.volume = 0.35;
     audio.preload = "auto";
+    audioRef.current = audio;
 
-    const startAudio = () => {
-      void audio.play().catch(() => {
-        // Browsers may block autoplay with sound until the first interaction.
-      });
+    const tryPlay = async () => {
+      try {
+        await audio.play();
+        setAudioPlaying(true);
+        return true;
+      } catch {
+        setAudioPlaying(false);
+        return false;
+      }
     };
 
-    startAudio();
+    void tryPlay();
 
-    const unlockAudio = () => {
-      startAudio();
+    const unlockAudio = async () => {
+      const started = await tryPlay();
+      if (!started) {
+        return;
+      }
+
       window.removeEventListener("click", unlockAudio);
       window.removeEventListener("touchstart", unlockAudio);
       window.removeEventListener("keydown", unlockAudio);
@@ -64,7 +76,28 @@ function App() {
       window.removeEventListener("keydown", unlockAudio);
       audio.pause();
       audio.currentTime = 0;
+      audioRef.current = null;
     };
+  }, []);
+
+  const toggleAudio = useCallback(async () => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
+
+    if (audio.paused) {
+      try {
+        await audio.play();
+        setAudioPlaying(true);
+      } catch {
+        setAudioPlaying(false);
+      }
+      return;
+    }
+
+    audio.pause();
+    setAudioPlaying(false);
   }, []);
 
   return (
@@ -76,6 +109,15 @@ function App() {
         {/* Fixed background elements */}
         <StarField />
         <FloatingHearts />
+
+        <button
+          type="button"
+          onClick={() => void toggleAudio()}
+          className="fixed left-3 bottom-3 z-40 btn-glow rounded-full px-4 py-2 text-sm text-white font-bold"
+          style={{ fontFamily: "'Noto Naskh Arabic', sans-serif" }}
+        >
+          {audioPlaying ? "ايقاف الصوت" : "تشغيل الصوت"}
+        </button>
 
         {/* Page transition overlay */}
         <div
