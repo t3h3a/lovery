@@ -34,7 +34,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const audio = new Audio("/videoplayback.mp4");
+    const audio = new Audio(`${import.meta.env.BASE_URL}videoplayback.mp4`);
     audio.loop = true;
     audio.volume = 0.35;
     audio.preload = "auto";
