@@ -78,7 +78,7 @@ export default function EndingPage({ onReplay }: EndingPageProps) {
               lineHeight: 1.2,
             }}
           >
-            ولاء...
+            إيمان...
           </h2>
           <p
             className="text-white font-bold"
