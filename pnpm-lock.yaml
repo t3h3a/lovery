@@ -383,7 +383,7 @@ importers:
         specifier: 'catalog:'
         version: 3.25.76
 
-  artifacts/walaa-love:
+  artifacts/eiman-love:
     devDependencies:
       '@hookform/resolvers':
         specifier: ^3.10.0
